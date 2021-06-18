@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath hello_django hello_django.wsgi
+web: gunicorn --pythonpath DjangoRestApi DjangoRestApi.wsgi
