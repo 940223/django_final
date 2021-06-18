@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -133,4 +133,35 @@ STATIC_URL = '/static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGGING = {
+'version': 1,
+'disable_existing_loggers': True,
+'formatters': {
+'standard': {
+'format': '%(asctime)s [%(name)s:%(lineno)d] [%(module)s:%(funcName)s] [%(levelname)s]- %(message)s'
+}
+},
+'handlers': {
+'debug': {
+'level':'DEBUG',
+'class':'logging.handlers.RotatingFileHandler',
+'filename': './debug.log',
+'formatter':'standard',
+},
+'console':{
+'level': 'DEBUG',
+'class': 'logging.StreamHandler',
+'formatter': 'standard',
+},
+},
+'loggers': {
+'django': {
+'handlers': ['console','debug'],
+'level': 'DEBUG',
+'propagate': True,
+},
+}
+}
